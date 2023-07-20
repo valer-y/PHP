@@ -1,9 +1,5 @@
 <?php
 
-require_once "../vendor/autoload.php"; ?>
-
-<?php
-
 $host   = 'mysql';
 $user   = 'root';
 $pwd 	= '12345678';
@@ -26,6 +22,19 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$price = $_POST['price'];
 	$date = date('Y-m-d H:i:s');
 
+    function randomString($n) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        $str = '';
+
+        for($i = 0; $i < $n; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $str .= $characters[$index];
+        }
+
+        return $str;
+    }
+
     if(!$title) {
         $errors[] = "Product title is required";
     }
@@ -35,25 +44,36 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if(empty($errors)) {
+            $image = $_FILES['image'] ?? null;
+            $imagePath = '';
+
+            if(!is_dir('images')) {
+                mkdir('images');
+            }
+
+            if($image && $image['tmp_name']) {
+
+                $imagePath = 'images/' . randomString(8) .'/' . $image['name'];
+                mkdir(dirname($imagePath));
+                move_uploaded_file($image['tmp_name'], $imagePath );
+            }
+
 			$query = "INSERT INTO products (title, image, description, price, create_date) 
             VALUES (:title, :image, :description, :price, :date)";
 
 			$stmt = $pdo->prepare($query);
 			$stmt->bindValue(':title', $title);
-			$stmt->bindValue(':image', '');
+			$stmt->bindValue(':image', $imagePath);
 			$stmt->bindValue(':description', $description);
 			$stmt->bindValue(':price', $price);
 			$stmt->bindValue(':date', $date);
 
 			$stmt->execute();
+
+            header('Location: index.php');
     }
 
-}
-
-var_dump($_SERVER['REQUEST_METHOD']);
-var_dump($errors);
-
-?>
+}?>
 
 <!doctype html>
 <html lang="en">
@@ -75,7 +95,7 @@ var_dump($errors);
     </div>
 <?php endif; ?>
 
-<form action="" method="POST" >
+<form action="" method="POST" enctype="multipart/form-data">
     <div class="form-group">
         <label>Product Image</label>
         <input type="file" name="image">
