@@ -6,3 +6,7 @@ body {
     max-width: 50px;
     height: auto;
 }
+
+.action-btn {
+    display: inline-block;
+}
