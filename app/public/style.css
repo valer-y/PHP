@@ -10,3 +10,8 @@ body {
 .action-btn {
     display: inline-block;
 }
+
+.update-image {
+    width: 150px;
+    margin-bottom: 20px;
+}
