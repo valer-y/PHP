@@ -14,15 +14,24 @@ $dsn = "mysql:host=$host;port=3306;dbname=$dbName";
 $pdo = new PDO($dsn, $user, $pwd);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$query = "SELECT * FROM products ORDER BY create_date DESC";
+$search = $_GET['search'] ?? '';
 
-$stmt = $pdo->prepare($query);
+$query = "SELECT * FROM products ORDER BY create_date DESC";
+$query_search = "SELECT * FROM products WHERE title LIKE :title ORDER BY create_date DESC";
+
+
+
+var_dump($search);
+if($search) {
+	$stmt = $pdo->prepare($query_search);
+    $stmt->bindValue(':title', "%$search%");
+} else {
+	$stmt = $pdo->prepare($query);
+}
+
 $stmt->execute();
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-//echo '<pre>';
-//var_dump($products);
-//echo '</pre>';
 ?>
 
 <!doctype html>
@@ -40,6 +49,15 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <p>
         <a href="create.php" class="btn btn-success">Create Product</a>
     </p>
+
+    <form action="/">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search products" name="search" value="<?php echo $search ?>" >
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button">Button</button>
+            </div>
+        </div>
+    </form>
 
     <table class="table">
         <thead>
