@@ -4,15 +4,8 @@ require_once "../vendor/autoload.php"; ?>
 
 <?php
 
-$host   = 'mysql';
-$user   = 'root';
-$pwd 	= '12345678';
-$dbName = 'products_crud';
-
-$dsn = "mysql:host=$host;port=3306;dbname=$dbName";
-
-$pdo = new PDO($dsn, $user, $pwd);
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+/** @var $pdo PDO */
+require_once "database.php"; // Db connect
 
 $search = $_GET['search'] ?? '';
 
@@ -34,16 +27,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Bootstrap demo</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-</head>
-<body>
+<?php include_once 'views/partials/header.php'?>
     <h1>Products CRUD demo</h1>
 
     <p>
