@@ -29,13 +29,22 @@ class Router
 		}
 
 		if ($fn) {
-			echo "<pre>";
-			var_dump($fn);
-			echo "</pre>";
-			echo "<br><br>";
-			var_dump($_SERVER);
+
+			call_user_func($fn, $this);
+//			echo "<pre>";
+//			var_dump($fn);
+//			echo "</pre>";
+//			echo "<br><br>";
+//			var_dump($_SERVER);
 		} else {
 			echo "Page not found";
 		}
+
+	}
+
+
+	public function renderView($view)
+	{
+		include_once __DIR__ . "/views/{$view}.php";
 	}
 }
