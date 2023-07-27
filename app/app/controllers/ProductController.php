@@ -8,7 +8,10 @@ class ProductController
 {
 	public static function index(Router $router)
 	{
-		$router->renderView('products/index');
+		$products = $router->db->getProducts();
+		$router->renderView('products/index', [
+			'products' => $products
+		]);
 	}
 
 	public static function create()

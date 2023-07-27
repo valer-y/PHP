@@ -11,7 +11,7 @@ class Database
 	private string $host   = 'mysql';
 	private string $user   = 'root';
 	private string $pwd 		= '12345678';
-	private string $dbName = 'data';
+	private string $dbName = 'products_crud';
 
 	public function __construct()
 	{
