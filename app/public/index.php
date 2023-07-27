@@ -4,11 +4,23 @@ $databse="products_crud";
 $pass="12345678";
 $table = "products";
 
+$search = $_GET['search'] ?? '';
+
+
 $pdo = new PDO("mysql:host=mysql;dbname={$databse}", $username, $pass);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $query_select = "SELECT * FROM {$table} ORDER BY create_date DESC";
+if($search) {
+	$query_select = "SELECT * FROM {$table} WHERE title LIKE :title ORDER BY create_date DESC";
+}
+
 $stmt = $pdo->prepare($query_select);
+
+if($search) {
+    $stmt->bindValue(':title', "%$search%");
+}
+
 $stmt->execute();
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -30,6 +42,14 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <p>
     <a href="create.php" class="btn btn-success">Create Product</a>
 </p>
+
+<form>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search for products" name="search" value="<?php echo $_GET['search']; ?>">
+        <button class="btn btn-outline-secondary" type="submit">Button</button>
+    </div>
+</form>
+
 
 <table class="table">
     <thead>
