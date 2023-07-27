@@ -16,3 +16,6 @@ $router->post('/products/delete', [ProductController::class, 'delete']);
 $router->get('/products', [ProductController::class, 'index']);
 
 $router->resolve();
+
+//$n = new ProductController();
+//$n->create();
