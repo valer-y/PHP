@@ -49,7 +49,9 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
       ?>
         <tr>
             <th scope="row"><?php echo $i;?></th>
-            <td></td>
+            <td>
+                <img src="<?php echo $product['image']?>" alt="">
+            </td>
             <td><?php echo $product['title']?></td>
             <td><?php echo $product['description']?></td>
             <td><?php echo $product['price']?></td>
