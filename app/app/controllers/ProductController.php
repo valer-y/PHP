@@ -8,7 +8,12 @@ class ProductController
 {
 	public static function index(Router $router)
 	{
-		$router->renderView('products/index');
+		$search = $_GET['search'] ?? '';
+		$products = $router->db->getProducts();
+		$router->renderView('products/index', [
+			'products' => $products,
+			'search' => $search
+		]);
 	}
 
 	public static function create()
@@ -18,12 +23,11 @@ class ProductController
 
 	public static function update()
 	{
-		echo "Update";
+		echo "Create";
 	}
 
 	public static function delete()
 	{
-		echo "Delete";
+		echo "Create";
 	}
-
 }

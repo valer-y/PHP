@@ -6,36 +6,36 @@ use PDO;
 
 class Database
 {
-
 	public \PDO $pdo;
-	private string $host   = 'mysql';
-	private string $user   = 'root';
-	private string $pwd 		= '12345678';
-	private string $dbName = 'data';
+
+	protected string $username  = 'root';
+	protected string $database	= "products_crud";
+	protected string $pass			="12345678";
+	public string $table	  	  = "products";
 
 	public function __construct()
 	{
-		$dsn = "mysql:host=$this->host;dbname=$this->dbName";
-		$this->pdo = new PDO($dsn, $this->user, $this->pwd);
+		$this->pdo = new PDO("mysql:host=mysql;dbname={$this->database}", $this->username, $this->pass);
 		$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	}
 
 	public function getProducts($search = '')
 	{
-		$search = $_GET['search'] ?? '';
+		var_dump($search);
+		$query_select = "SELECT * FROM {$this->table} ORDER BY create_date DESC";
+		if($search) {
+			$query_select = "SELECT * FROM {$this->table} WHERE title LIKE :title ORDER BY create_date DESC";
+		}
 
-		$query = "SELECT * FROM products ORDER BY create_date DESC";
-		$query_search = "SELECT * FROM products WHERE title LIKE :title ORDER BY create_date DESC";
+		$stmt = $this->pdo->prepare($query_select);
 
 		if($search) {
-			$stmt = $this->pdo->prepare($query_search);
 			$stmt->bindValue(':title', "%$search%");
-		} else {
-			$stmt = $this->pdo->prepare($query);
 		}
 
 		$stmt->execute();
-		return $stmt->fetchAll(PDO::FETCH_ASSOC);
-	}
 
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+	}
 }

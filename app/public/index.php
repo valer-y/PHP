@@ -1,21 +1,28 @@
 <?php
 
-require_once "../vendor/autoload.php";
+require_once dirname(__DIR__) . "/vendor/autoload.php";
 
 use App\Router;
-use App\controllers\ProductController;
+use App\Controllers\ProductController;
 
 $router = new Router();
 
-$router->get('/', [ProductController::class, 'index']);
-$router->get('/products/create', [ProductController::class, 'create']);
-$router->post('/products/create', [ProductController::class, 'create']);
-$router->get('/products/update', [ProductController::class, 'update']);
-$router->post('/products/update', [ProductController::class, 'update']);
-$router->post('/products/delete', [ProductController::class, 'delete']);
-$router->get('/products', [ProductController::class, 'index']);
+$router->get('/', [ProductController::class, 'index'])
+<<<<<<< HEAD
+	->get('/products', [ProductController::class, 'index'])
+=======
+	->get('/products', [ProductController::class, 'create'])
+>>>>>>> main
+	->get('/products/create', [ProductController::class, 'create'])
+	->post('/products/create', [ProductController::class, 'create'])
+	->get('/products/update', [ProductController::class, 'update'])
+	->post('/products/update', [ProductController::class, 'update'])
+<<<<<<< HEAD
+	->post('/products/delete', [ProductController::class, 'delete']);
 
 $router->resolve();
+=======
+	->post('/products/update', [ProductController::class, 'updelete']);
 
-//$n = new ProductController();
-//$n->create();
+$router->resolve();
+>>>>>>> main

@@ -1,1 +1,1 @@
-<h1>Create new product</h1>
+<h1>Create</h1>

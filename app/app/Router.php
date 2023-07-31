@@ -6,45 +6,64 @@ class Router
 {
 	public array $getRoutes = [];
 	public array $postRoutes = [];
+	public Database $db;
+
+	public function  __construct() {
+		$this->db = new Database();
+	}
 
 	public function get($url, $fn)
 	{
 		$this->getRoutes[$url] = $fn;
+
+		return $this;
 	}
 
 	public function post($url, $fn)
 	{
 		$this->postRoutes[$url] = $fn;
+
+		return $this;
 	}
 
-	public function resolve()
+	public function resolve ()
 	{
+<<<<<<< HEAD
 		$currentUrl = $_SERVER['REQUEST_URI'] ?? '/';
-		$method = $_SERVER['REQUEST_METHOD'];
+		$requestMethod = $_SERVER['REQUEST_METHOD'];
 
-		if ($method === 'GET') {
+		if ($requestMethod === 'GET') {
+			var_dump($_SERVER);
 			$fn = $this->getRoutes[$currentUrl] ?? null;
-		} else {
+		}
+
+		if ($requestMethod === 'POST') {
 			$fn = $this->postRoutes[$currentUrl] ?? null;
 		}
 
 		if ($fn) {
-
 			call_user_func($fn, $this);
-//			echo "<pre>";
-//			var_dump($fn);
-//			echo "</pre>";
-//			echo "<br><br>";
-//			var_dump($_SERVER);
 		} else {
+			var_dump($fn);
 			echo "Page not found";
 		}
-
 	}
 
-
-	public function renderView($view)
+	public function renderView($view, $params = [])
 	{
+		foreach ($params as $key => $value) {
+			$$key = $value;
+		}
+
+		ob_start();
 		include_once __DIR__ . "/views/{$view}.php";
+		$content = ob_get_clean();
+		include_once __DIR__ . "/views/_layout.php";
+=======
+		echo "<pre>";
+		var_dump($_SERVER);
+		var_dump($_SERVER['REQUEST_URI']);
+		echo "</pre>";
+>>>>>>> main
 	}
 }
