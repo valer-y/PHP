@@ -8,21 +8,11 @@ use App\Controllers\ProductController;
 $router = new Router();
 
 $router->get('/', [ProductController::class, 'index'])
-<<<<<<< HEAD
-	->get('/products', [ProductController::class, 'index'])
-=======
 	->get('/products', [ProductController::class, 'create'])
->>>>>>> main
 	->get('/products/create', [ProductController::class, 'create'])
 	->post('/products/create', [ProductController::class, 'create'])
 	->get('/products/update', [ProductController::class, 'update'])
-	->post('/products/update', [ProductController::class, 'update'])
-<<<<<<< HEAD
-	->post('/products/delete', [ProductController::class, 'delete']);
+	->post('/products/update', [ProductController::class, 'update']);
 
 $router->resolve();
-=======
-	->post('/products/update', [ProductController::class, 'updelete']);
 
-$router->resolve();
->>>>>>> main

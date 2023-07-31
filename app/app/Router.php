@@ -28,7 +28,6 @@ class Router
 
 	public function resolve ()
 	{
-<<<<<<< HEAD
 		$currentUrl = $_SERVER['REQUEST_URI'] ?? '/';
 		$requestMethod = $_SERVER['REQUEST_METHOD'];
 
@@ -59,11 +58,5 @@ class Router
 		include_once __DIR__ . "/views/{$view}.php";
 		$content = ob_get_clean();
 		include_once __DIR__ . "/views/_layout.php";
-=======
-		echo "<pre>";
-		var_dump($_SERVER);
-		var_dump($_SERVER['REQUEST_URI']);
-		echo "</pre>";
->>>>>>> main
 	}
 }
