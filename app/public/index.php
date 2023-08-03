@@ -1,3 +1,9 @@
 <?php
 
-declare(strict_types = 1);
+require_once  '../Transaction.php';
+
+// Classes
+$transaction = new Transaction(15, 'Transaction');
+
+var_dump($transaction);
+
