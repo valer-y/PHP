@@ -1,18 +1,23 @@
 <?php
 
-require_once dirname(__DIR__) . "/vendor/autoload.php";
+declare(strict_types = 1);
 
-use App\Router;
-use App\controllers\ProductController;
+$root = dirname(__DIR__) . DIRECTORY_SEPARATOR;
 
-$router = new Router();
+define('APP_PATH', $root . 'app' . DIRECTORY_SEPARATOR);
+define('FILES_PATH', $root . 'transaction_files' . DIRECTORY_SEPARATOR);
+define('VIEWS_PATH', $root . 'views' . DIRECTORY_SEPARATOR);
 
-$router->get('/', [ProductController::class, 'index'])
-	->get('/products', [ProductController::class, 'index'])
-	->get('/products/create', [ProductController::class, 'create'])
-	->post('/products/create', [ProductController::class, 'create'])
-	->get('/products/update', [ProductController::class, 'update'])
-	->post('/products/update', [ProductController::class, 'update'])
-	->post('/products/delete', [ProductController::class, 'delete']);
+require_once APP_PATH . "App.php";
 
-$router->resolve();
+$files = getTransactionFiles(FILES_PATH);
+
+$transactions = [];
+foreach ($files as $file) {
+    $transactions = array_merge($transactions, getTransactions($file, 'extractTransaction'));
+}
+
+$totals = calculateTotals($transactions);
+
+
+require_once VIEWS_PATH . "transactions.php";

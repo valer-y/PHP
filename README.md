@@ -1,3 +1,7 @@
-// install composer from php container
-// docker/php-fpm/assets/xdebug.ini - write true ip (hostname -I)
-// install composer inside php container then ru (also inside) using 'composer dumpautoload'
+#### The exercise for the PHP course "Learn PHP The Right Way" lesson 2.1.
+
+https://youtu.be/I_9-xWmkh28
+
+---
+#### Course Playlist
+https://www.youtube.com/watch?v=sVbEyFZKgqk&list=PLr3d3QYzkw2xabQRUpcZ_IBk9W50M9pe-
