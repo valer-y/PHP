@@ -1,9 +1,8 @@
 <?php
 
-require_once  '../Transaction.php';
+require dirname(__DIR__) . "/vendor/autoload.php";
 
-// Classes
-$transaction = new Transaction(15, 'Transaction');
+use App\Transaction;
 
-var_dump($transaction);
+$x = new Transaction();
 
