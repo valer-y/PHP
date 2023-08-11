@@ -2,7 +2,8 @@
 
 require dirname(__DIR__) . "/vendor/autoload.php";
 
-use App\Transaction;
+use App\DebtCollectionService;
 
-var_dump(Transaction::class);
+$collector = new DebtCollectionService();
 
+echo $collector->collectDebt(new \App\CollectionAgency()) . PHP_EOL;
