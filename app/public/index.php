@@ -2,10 +2,8 @@
 
 require dirname(__DIR__) . "/vendor/autoload.php";
 
-$obj = new class(2) {
-    public function __construct(public int $x)
-    {
-    }
-};
+$latte = new \App\LatteMaker();
 
-var_dump($obj);
+$latte_clone = clone $latte;
+
+var_dump($latte, $latte_clone);
