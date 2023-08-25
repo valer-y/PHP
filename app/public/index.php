@@ -1,9 +1,17 @@
 <?php
 
-require dirname(__DIR__) . "/vendor/autoload.php";
+require_once dirname(__DIR__) . "/vendor/autoload.php";
 
-$latte = new \App\LatteMaker();
+use App\Invoice;
+use App\Customer;
 
-$latte_clone = clone $latte;
+$invoice = new Invoice(new Customer());
 
-var_dump($latte, $latte_clone);
+try {
+    $invoice->process(25);
+} catch (\App\Exception\MissingValueException | \http\Exception\InvalidArgumentException $e) {
+    echo $e->getFile() . $e->getMessage() . $e->getLine();
+} finally {
+    echo 'Finally reached' . PHP_EOL;
+}
+
