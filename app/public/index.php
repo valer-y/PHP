@@ -2,16 +2,14 @@
 
 require_once dirname(__DIR__) . "/vendor/autoload.php";
 
-$date1 = new DateTime('05/25/2023 9:15 AM');
-$date2 = new DateTime('01/25/2023 9:15 AM');
-$interval = new DateInterval('P2M3D');
+use App\Invoice;
 
-//var_dump($date1->diff($date2)->format('%Y, %m, %d'));
+//foreach (new \App\Invoice(25) as $key => $value) {
+//    echo $key . ' = ' . $value . PHP_EOL;
+//}
 
-$date2->add($interval);
+$invoices = new \App\InvoiceCollection([new Invoice(25), new Invoice(50), new Invoice(100)]);
 
-echo $date2->format('m/d/Y g:iA') . PHP_EOL;
-
-$date1->sub($interval);
-
-echo $date1->format('m/d/Y g:iA');
+foreach ($invoices as $invoice) {
+    echo $invoice->id . ' - ' . $invoice->amount . PHP_EOL;
+}
