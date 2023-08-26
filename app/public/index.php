@@ -2,16 +2,16 @@
 
 require_once dirname(__DIR__) . "/vendor/autoload.php";
 
-use App\Invoice;
-use App\Customer;
+$date1 = new DateTime('05/25/2023 9:15 AM');
+$date2 = new DateTime('01/25/2023 9:15 AM');
+$interval = new DateInterval('P2M3D');
 
-$invoice = new Invoice(new Customer());
+//var_dump($date1->diff($date2)->format('%Y, %m, %d'));
 
-try {
-    $invoice->process(25);
-} catch (\App\Exception\MissingValueException | \http\Exception\InvalidArgumentException $e) {
-    echo $e->getFile() . $e->getMessage() . $e->getLine();
-} finally {
-    echo 'Finally reached' . PHP_EOL;
-}
+$date2->add($interval);
 
+echo $date2->format('m/d/Y g:iA') . PHP_EOL;
+
+$date1->sub($interval);
+
+echo $date1->format('m/d/Y g:iA');
