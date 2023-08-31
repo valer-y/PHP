@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Classes;
+namespace App\Controllers;
 
-class Invoice
+class InvoiceController
 {
     public function index() : string
     {
@@ -11,7 +11,7 @@ class Invoice
 
     public function create() : string
     {
-        return '<form action="/invoices/create" method="post"><label for="">Amount</label><input type="text" name="amount"></form>';
+        return '';
     }
 
     public function store() {
