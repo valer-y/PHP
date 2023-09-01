@@ -5,15 +5,16 @@ require_once dirname(__DIR__) . "/vendor/autoload.php";
 session_start();
 
 define('STORAGE_PATH', dirname(__DIR__) . '/storage');
+define('VIEW_PATH', dirname(__DIR__) . '/views/');
 
 $router = new \App\Router();
 
 $router
-    ->get('/', [\App\Classes\Home::class, 'index'])
-    ->post('/upload', [\App\Classes\Home::class, 'upload'])
-    ->get('/invoices', [\App\Classes\Invoice::class, 'index'])
-    ->get('/invoices/create', [\App\Classes\Invoice::class, 'create'])
-    ->post('/invoices/create', [\App\Classes\Invoice::class, 'store']);
+    ->get('/', [\App\Controllers\HomeController::class, 'index'])
+    ->post('/upload', [\App\Controllers\HomeController::class, 'upload'])
+    ->get('/invoices', [\App\Controllers\InvoiceController::class, 'index'])
+    ->get('/invoices/create', [\App\Controllers\InvoiceController::class, 'create'])
+    ->post('/invoices/create', [\App\Controllers\InvoiceController::class, 'store']);
 
 echo $router->resolve(
     $_SERVER['REQUEST_URI'],
