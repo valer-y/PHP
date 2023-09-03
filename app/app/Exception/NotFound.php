@@ -2,9 +2,7 @@
 
 namespace App\Exception;
 
-use Exception;
-
-class RouteNotFoundException extends \Exception
+class NotFound extends \Exception
 {
     protected $message = '404 not found';
 }

@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App;
 
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
+use App\Exception\RouteNotFoundException;
 
 class Router
 {
