@@ -3,11 +3,31 @@
 namespace App\Controllers;
 
 use App\View;
+use PDO;
 
 class HomeController
 {
     public function index() : View
     {
+        try {
+            $db = new PDO('mysql:host=db;dbname=my_db', 'root', 'root');
+
+            $query = 'SELECT * FROM users';
+
+            foreach ($db->query($query)->fetchAll(PDO::FETCH_OBJ) as $user) {
+                echo '<pre>';
+                var_dump($user);
+                echo '</pre>';
+            };
+
+//            var_dump($stmt->fetchAll());
+
+        } catch (\PDOException $e) {
+            throw new \PDOException($e->getMessage(), $e->getCode());
+        }
+
+        var_dump($db);
+
         return View::make('index', ['header' => 'bar']);
     }
 
