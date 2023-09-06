@@ -5,6 +5,9 @@ require_once dirname(__DIR__) . "/vendor/autoload.php";
 
 session_start();
 
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
+
 define('STORAGE_PATH', dirname(__DIR__) . '/storage');
 define('VIEW_PATH', dirname(__DIR__) . '/views/');
 
