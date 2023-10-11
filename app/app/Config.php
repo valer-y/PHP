@@ -2,7 +2,6 @@
 
 namespace App;
 
-
 /**
  * @property-read ?array $db
  */
