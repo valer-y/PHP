@@ -2,8 +2,13 @@
 
 declare(strict_types=1);
 
-require_once "../Transaction.php";
+spl_autoload_register(function ($class) {
+    $path = __DIR__ . '/../' . lcfirst(str_replace('\\', '/', $class)). '.php';
+    require $path;
+});
 
-use PaymentGateway\Stripe\Transaction;
+use App\PaymentGateway\Paddle\Transaction;
 
-var_dump(new Transaction());
+$paddleTransaction = new Transaction();
+
+var_dump($paddleTransaction);
