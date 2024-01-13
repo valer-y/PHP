@@ -6,18 +6,21 @@ use App\Enums\Status;
 
 class Transaction
 {
-//    private string $status;
+    static public int $count = 0;
 
-    public function __construct()
-    {
-        $this->setStatus(Status::DECLINED);
+    public function __construct(
+        public float $amount,
+        public string $description
+    ) {
+        self::$count++;
     }
 
-    public function setStatus(string $status) : self
-    {
-        $this->status = $status;
-
-        return $this;
+    static public function getCount() {
+        return self::$count;
     }
 
+    public function process()
+    {
+        echo 'Process paddle transaction...';
+    }
 }

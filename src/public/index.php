@@ -7,8 +7,9 @@ require __DIR__ . '/../vendor/autoload.php';
 use App\PaymentGateway\Paddle\Transaction;
 use App\Enums\Status;
 
-$transaction = new Transaction();
+$transaction = new Transaction(25 , 'Transaction 1');
+$transaction = new Transaction(25 , 'Transaction 1');
+$transaction = new Transaction(25 , 'Transaction 1');
+$transaction = new Transaction(25 , 'Transaction 1');
 
-$transaction->setStatus(Status::DECLINED);
-
-var_dump($transaction);
+var_dump(Transaction::getCount());
