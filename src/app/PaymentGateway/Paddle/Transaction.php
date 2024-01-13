@@ -6,20 +6,21 @@ use App\Enums\Status;
 
 class Transaction
 {
-    static public int $counter = 0;
+    static public int $count = 0;
 
     public function __construct(
-        private int $amount,
-        private string $description
-    )
-    {
-        echo "Paddle transaction created..." . $this->amount . ' ' . $this->description . '<br />';
-        self::$counter++;
+        public float $amount,
+        public string $description
+    ) {
+        self::$count++;
     }
 
-    static public function getCounter() : int
-    {
-        return self::$counter;
+    static public function getCount() {
+        return self::$count;
     }
 
+    public function process()
+    {
+        echo 'Process paddle transaction...';
+    }
 }
