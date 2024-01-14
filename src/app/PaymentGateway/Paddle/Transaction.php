@@ -1,26 +1,25 @@
 <?php
 
-namespace App\PaymentGateway\Paddle;
+declare(strict_types=1);
 
-use App\Enums\Status;
+namespace App\PaymentGateway\Paddle;
 
 class Transaction
 {
-    static public int $count = 0;
+    private float $amount;
 
-    public function __construct(
-        public float $amount,
-        public string $description
-    ) {
-        self::$count++;
+    public function __construct(float $amount)
+    {
+        $this->amount = $amount;
     }
 
-    static public function getCount() {
-        return self::$count;
+    public function getAmount() : float
+    {
+        return $this->amount;
     }
 
     public function process()
     {
-        echo 'Process paddle transaction...';
+        echo 'Processing $' . $this->amount . ' transaction';
     }
 }
