@@ -18,7 +18,13 @@ $toaster->addSlice('bread');
 $toaster->addSlice('bread');
 
 $toaster->toast();
-//$transaction = new Transaction(25);
-//
-//$transaction->process();
 
+$fields = [
+    //new \App\Field('baseField'), // Abstract ?
+    new \App\Text('textField'),
+    new \App\Radio('radioField')
+];
+
+foreach ($fields as $field) {
+    echo $field->render() . '<br />';
+}
