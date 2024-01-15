@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use App\CollectionAgency;
+use App\Invoice;
 
-$collector = new \App\DebtCollectionService();
+$invoice = new Invoice(15);
 
-echo $collector->collectDebt(new CollectionAgency) . PHP_EOL;
+echo $invoice->amount . PHP_EOL;
+
+//$invoice->status = 15;
