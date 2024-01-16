@@ -4,8 +4,13 @@ declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$classA = new \App\ClassA();
-$classB = new \App\ClassB();
+$coffeeMaker = new \App\CoffeeMaker();
+$coffeeMaker->makeCoffe();
 
-echo $classA->getName() . PHP_EOL;
-echo $classB->getName() . PHP_EOL;
+$latteMaker = new \App\LatteMaker();
+$latteMaker->makeCoffe();
+$latteMaker->makeLatte();
+
+$allInOneCoffeeMaker = new \App\AllInOneCoffeMaker();
+$allInOneCoffeeMaker->makeLatte();
+$allInOneCoffeeMaker->makeCappuccino();
