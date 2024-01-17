@@ -4,24 +4,15 @@ namespace App;
 
 class Invoice
 {
-    public float $amount = 15;
+    private string $id;
 
-    public function __construct(float $amount)
+    public function __construct()
     {
-        $this->amount = $amount;
+        $this->id = uniqid('invoice_');
     }
 
-    public function __get(string $name)
+    public static function create() : static
     {
-        if(property_exists($this, $name)) {
-            return $this->$name;
-        }
-
-        return null;
-    }
-
-    public function __set(string $name, $value): void
-    {
-        var_dump($name, $value);
+        return new static();
     }
 }
