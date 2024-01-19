@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use App\Invoice;
-use App\Customer;
+$date = '15/03/2023 3:30PM';
 
-$invoice = new Invoice(new Customer());
+//$dateTime = new DateTime('tomorrow 3:35');
 
-$invoice->process(25);
+//echo $dateTime->format('g:i A') . PHP_EOL;
+
+$from = new DateTime();
+$to = (clone $from)->add(new DateInterval('P1M'));
+
+var_dump($from, $to);
