@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-//foreach (new \App\Invoice() as $key => $value) {
-//    echo $key . ' = ' . $value . PHP_EOL;
-//}
+$router = new \App\Router();
 
+$router
+    ->register('/', [App\Classes\Home::class, 'index'])
+    ->register('/invoices', [App\Classes\Invoices::class, 'index'])
+    ->register('/invoices/create', [App\Classes\Invoices::class, 'create']);
 
-$invoiceList = new App\InvoiceCollection([new \App\Invoice(25), new \App\Invoice(35), new \App\Invoice(45)]);
-
-foreach ($invoiceList as $invoice) {
-    echo $invoice->id . ' - '. PHP_EOL;
-}
+$router->resolve($_SERVER['REQUEST_URI']);
