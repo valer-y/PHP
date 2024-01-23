@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use App\Invoice;
-use App\Customer;
+//foreach (new \App\Invoice() as $key => $value) {
+//    echo $key . ' = ' . $value . PHP_EOL;
+//}
 
-$invoice = new Invoice(new Customer());
 
-$invoice->process(25);
+$invoiceList = new App\InvoiceCollection([new \App\Invoice(25), new \App\Invoice(35), new \App\Invoice(45)]);
+
+foreach ($invoiceList as $invoice) {
+    echo $invoice->id . ' - '. PHP_EOL;
+}
