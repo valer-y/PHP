@@ -11,4 +11,4 @@ $router
     ->register('/invoices', [App\Classes\Invoices::class, 'index'])
     ->register('/invoices/create', [App\Classes\Invoices::class, 'create']);
 
-$router->resolve($_SERVER['REQUEST_URI']);
+echo $router->resolve($_SERVER['REQUEST_URI']);

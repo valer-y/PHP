@@ -8,6 +8,6 @@ class Home
 {
     public function index()
     {
-        return 'Home';
+        echo 'Home';
     }
 }
