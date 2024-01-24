@@ -7,8 +7,9 @@ require __DIR__ . '/../vendor/autoload.php';
 $router = new \App\Router();
 
 $router
-    ->register('/', [App\Classes\Home::class, 'index'])
-    ->register('/invoices', [App\Classes\Invoices::class, 'index'])
-    ->register('/invoices/create', [App\Classes\Invoices::class, 'create']);
+    ->get('/', [App\Classes\Home::class, 'index'])
+    ->get('/invoices', [App\Classes\Invoices::class, 'index'])
+    ->get('/invoices/create', [App\Classes\Invoices::class, 'create'])
+    ->post('/invoices/create', [App\Classes\Invoices::class, 'create']);
 
-$router->resolve($_SERVER['REQUEST_URI']);
+echo $router->resolve($_SERVER['REQUEST_URI'], strtolower($_SERVER['REQUEST_METHOD']));
