@@ -4,14 +4,16 @@ namespace App\Classes;
 
 class Invoices
 {
-    public function index(): string
-    {
-        return 'Home';
-    }
 
     public function create() : string
     {
-        return '<form action="/invoces/create" method="post"><label>Amount<input type="text" name="amount" id=""></label></form>';
+        echo '<pre>';
+//        var_dump($_REQUEST);
+        var_dump($_POST);
+        var_dump($_GET);
+        echo '</pre>';
+
+        return '<form action="/invoices/create" method="post"><label>Amount<input type="text" name="amount" id=""></label></form>';
     }
 
     public function store()
