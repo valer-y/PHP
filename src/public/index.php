@@ -9,10 +9,10 @@ session_start();
 $router = new \App\Router();
 
 $router
-    ->get('/', [App\Classes\Home::class, 'index'])
-    ->get('/invoices', [App\Classes\Invoices::class, 'index'])
-    ->get('/invoices/create', [App\Classes\Invoices::class, 'create'])
-    ->post('/invoices/create', [App\Classes\Invoices::class, 'store']);
+    ->get('/', [App\Controllers\HomeController::class, 'index'])
+    ->get('/invoices', [App\Controllers\InvoicesController::class, 'index'])
+    ->get('/invoices/create', [App\Controllers\InvoicesController::class, 'create'])
+    ->post('/invoices/create', [App\Controllers\InvoicesController::class, 'store']);
 
 echo $router->resolve($_SERVER['REQUEST_URI'], strtolower($_SERVER['REQUEST_METHOD']));
 

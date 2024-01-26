@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Classes;
+namespace App\Controllers;
 
-class Invoices
+class InvoicesController
 {
 
     public function create() : string
