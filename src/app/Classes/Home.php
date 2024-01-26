@@ -8,13 +8,26 @@ class Home
 {
     public function index()
     {
-        echo '<pre>';
-//        var_dump($_REQUEST);
-        var_dump($_POST);
-        var_dump($_GET);
-        echo '</pre>';
+        return <<<FORM
+<form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="receipt" id="">
+    <button type="submit">Upload</button>    
+</form> 
+FORM;
+    }
 
+    public function upload()
+    {
+        echo "<pre>";
+        var_dump($_FILES);
+        echo "</pre>";
 
-        return '<form action="/" method="post"><label>Amount<input type="text" name="amount" id=""></label></form>';
+        $file_path = STORAGE_PATH . '/' . $_FILES['receipt']['name'];
+
+        move_uploaded_file($_FILES['receipt']['tmp_name'], $file_path);
+
+        echo "<pre>";
+        var_dump(pathinfo($file_path));
+        echo "</pre>";
     }
 }
