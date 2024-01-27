@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
+define('STORAGE_PATH', __DIR__ . '/../storage');
+define('VIEW_PATH', __DIR__ . '/../views');
+
 session_start();
 
 $router = new \App\Router();

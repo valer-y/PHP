@@ -2,18 +2,19 @@
 
 namespace App\Controllers;
 
+use App\View;
+
 class InvoicesController
 {
 
-    public function create() : string
+    public function index() : View
     {
-        echo '<pre>';
-//        var_dump($_REQUEST);
-        var_dump($_POST);
-        var_dump($_GET);
-        echo '</pre>';
+        return View::make('invoices/index');
+    }
 
-        return '<form action="/invoices/create" method="post"><label>Amount<input type="text" name="amount" id=""></label></form>';
+    public function create() : View
+    {
+        return View::make('invoices/create');
     }
 
     public function store()

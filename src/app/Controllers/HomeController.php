@@ -3,17 +3,13 @@
 declare(strict_types=1);
 
 namespace App\Controllers;
+use App\View;
 
 class HomeController
 {
-    public function index()
+    public function index() : View
     {
-        return <<<FORM
-<form action="/upload" method="post" enctype="multipart/form-data">
-    <input type="file" name="receipt" id="">
-    <button type="submit">Upload</button>    
-</form> 
-FORM;
+        return View::make('index', ['foo' => 'bar']);
     }
 
     public function upload()
