@@ -22,6 +22,8 @@ class HomeController
 
         move_uploaded_file($_FILES['receipt']['tmp_name'], $file_path);
 
+        header('Location: /');
+
         echo "<pre>";
         var_dump(pathinfo($file_path));
         echo "</pre>";
