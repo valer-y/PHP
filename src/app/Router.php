@@ -30,8 +30,6 @@ class Router
         return $this->routes();
     }
 
-
-
     public function resolve(string $requestUri, string $requestMethod)
     {
         $route = explode('?', $requestUri)[0];
