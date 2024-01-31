@@ -4,7 +4,4 @@ declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$router = require '../app/Routes/index.php'
-?>
-
-<h1>Hi!</h1>
+$router = require '../app/Routes/index.php';
