@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-//$pdo = new PDO('mysql:host=sandbox-db;port=3306;dbname=my_db', 'root', 'root');
-//$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//
-//$statement = $pdo->prepare('SELECT * FROM products ORDER BY create_date DESC');
-//$statement->execute();
-//$products = $statement->fetchAll(PDO::FETCH_ASSOC);
-//
+$pdo = new PDO('mysql:host=sandbox-db;port=3306;dbname=my_db', 'root', 'root');
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+$query = 'SELECT * FROM products ORDER BY create_date DESC';
+
+$statement = $pdo->prepare($query);
+$statement->execute();
+$products = $statement->fetchAll(PDO::FETCH_ASSOC);
+
 //var_dump($products);
 
 //phpinfo();
@@ -28,33 +30,35 @@ require __DIR__ . '/../vendor/autoload.php';
 <body>
 <h1>Train CRUD</h1>
 
+<p>
+    <a href="create.php" class="btn btn-success">Create Product</a>
+</p>
+
 <table class="table">
     <thead>
     <tr>
         <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col">Image</th>
+        <th scope="col">Title</th>
+        <th scope="col">Price</th>
+        <th scope="col">Create Date</th>
+        <th scope="col">Action</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-    </tr>
-    <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-    </tr>
-    <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-    </tr>
+    <?php foreach ($products as $i => $elem) :?>
+        <tr>
+            <th scope="row"><?php echo ++$i; ?></th>
+            <td><?php echo $elem['image']; ?></td>
+            <td><?php echo $elem['title']; ?></td>
+            <td><?php echo $elem['price']; ?></td>
+            <td><?php echo $elem['create_date']; ?></td>
+            <td>
+                <button type="button" class="btn btn-sm btn-outline-primary">Edit class</button>
+                <button type="button" class="btn btn-sm btn-outline-danger">Base class</button>
+            </td>
+        </tr>
+    <?php endforeach;?>
     </tbody>
 </table>
 </body>
