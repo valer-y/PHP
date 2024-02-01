@@ -7,7 +7,18 @@ require __DIR__ . '/../vendor/autoload.php';
 $pdo = new PDO('mysql:host=sandbox-db;port=3306;dbname=my_db', 'root', 'root');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-//var_dump($products);
+$title = $_POST['title'];
+$description = $_POST['description'];
+$price = $_POST['price'];
+$date = date('Y-m-d H:i:s');
+
+$pdo->prepare("INSERT INTO products (title, image, description, price, create_date) VALUE ('$title', '', '$description', $price, '$date'");
+
+
+
+echo "<pre>";
+var_dump($_GET);
+echo "</pre>";
 
 //phpinfo();
 ?>
@@ -24,22 +35,23 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 <body>
 <h1>Create new product</h1>
 
-<form>
+<form action="" method="post">
     <div class="form-group mb-3">
         <label>Product Image</label>
-        <input type="file" class="form-control">
+        <br />
+        <input type="file" name="image">
     </div>
     <div class="form-group mb-3">
         <label>Product Title</label>
-        <input type="text" class="form-control">
+        <input type="text" name="title" class="form-control">
     </div>
     <div class="form-group mb-3">
         <label>Product Description</label>
-        <textarea class="form-control"></textarea>
+        <textarea class="form-control" name="descritpion"></textarea>
     </div>
     <div class="form-group mb-3">
         <label>Product Price</label>
-        <input type="number" step=".01" class="form-control">
+        <input type="number" step=".01" class="form-control" name="price">
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
