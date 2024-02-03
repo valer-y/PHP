@@ -10,12 +10,12 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $title = '';
 $description = '';
 $price = 0.00;
+$date = date('Y-m-d H:i:s');
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'] ?? '';
     $description = $_POST['description'] ?? '';
     $price = $_POST['price'] ?? 0.00;
-    $date = date('Y-m-d H:i:s');
 
     $errors = [];
 
@@ -43,7 +43,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $image = $_FILES['image'] ?? null;
         $imagePath = '';
 
-        if($image) {
+        if($image && $image['tmp_name']) {
 
             $imagePath = 'images/' . randomString(8) . '/' . $image['name'];
             mkdir(dirname($imagePath));
@@ -60,15 +60,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $statement->bindValue(':date', $date);
 
         $statement->execute();
+
         header('Location: index.php');
     }
 
 };
 
-
-echo "<pre>";
-var_dump($_GET);
-echo "</pre>";
+//echo "<pre>";
+//var_dump($_GET);
+//echo "</pre>";
 
 //phpinfo();
 ?>
