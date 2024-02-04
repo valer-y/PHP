@@ -1,3 +1,5 @@
+<h1>Create Page</h1>
+
 
 <?php if(!empty($errors)) : ?>
     <div class="alert alert-danger">
@@ -20,15 +22,15 @@
     </div>
     <div class="form-group mb-3">
         <label>Product Title</label>
-        <input type="text" name="title" class="form-control" value="<?php echo $title ?>">
+        <input type="text" name="title" class="form-control" value="<?php echo $products['title'] ?>">
     </div>
     <div class="form-group mb-3">
         <label>Product Description</label>
-        <textarea class="form-control" name="descritpion"><?php echo $description ?></textarea>
+        <textarea class="form-control" name="descritpion"><?php echo $products['description'] ?></textarea>
     </div>
     <div class="form-group mb-3">
         <label>Product Price</label>
-        <input type="number" step=".01" class="form-control" name="price" value="<?php echo $price ?>">
+        <input type="number" step=".01" class="form-control" name="price" value="<?php echo $products['price'] ?>">
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
