@@ -11,32 +11,42 @@ class HomeController
     public function index() : View
     {
         try {
-            $db = new PDO('mysql:host=db;dbname=my_db', 'root', 'root', [
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-            ]);
-
-            $email = "Nick@doe.com";
-            $name = "Nick Doe";
-            $isActive = 1;
-
-            $stmt = $db->prepare('INSERT INTO users (email, full_name, is_active, created_at) VALUES (?, ?, ?, NOW())');
-            $stmt->execute([$email, $name, $isActive]);
-
-            $id = $db->lastInsertId();
-
-            var_dump($id);
-
-            $user = $db->query("SELECT * FROM users WHERE id = " .$id)->fetchAll(PDO::FETCH_ASSOC);
-
+            $db = new PDO('mysql:host=db;dbname=my_db', 'root', 'root');
         } catch (\PDOException $e){
             throw new \PDOException($e->getMessage(), (int) $e->getCode());
         }
 
+        $email = "jack@doe.com";
+        $name = "Jack Doe";
+        $amount = 20;
+
+        $newUserStmt = $db->prepare('
+                INSERT INTO users (email, full_name, is_active, created_at) 
+                VALUES (?, ?, 1, NOW())');
+        $newInvoiceStmt = $db->prepare(
+            'INSERT INTO invoices (amount, user_id) VALUES (?, ?)'
+        );
+
+        $newUserStmt->execute([$email, $name]);
+
+        $userId = (int) $db->lastInsertId();
+
+        $newInvoiceStmt->execute([$amount, $userId]);
+
+        $fetchStmt = $db->prepare(
+            'SELECT invoices.id AS invoice_id, amount, user_id, full_name
+            FROM invoices
+            INNER JOIN users ON user_id = users.id
+            WHERE email = ?'
+        );
+
+        $fetchStmt->execute([$email]);
+
         echo "<pre>";
-        var_dump($user);
+        var_dump($fetchStmt->fetch(PDO::FETCH_ASSOC));
         echo "</pre>";
 
-        return View::make('index');
+        return View::make('index', ['foo' => 'bar']);
     }
 
     public function upload()
