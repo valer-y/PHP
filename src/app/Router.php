@@ -2,58 +2,54 @@
 
 namespace App;
 
-use App\Exceptions\RouteNotFoundException;
-
 class Router
 {
-    private array $routes;
+    public array $getRoutes;
+    public array $postRoutes;
+    public Database $db;
 
-    public function register(string $requestMethod,string $route, callable|array $action) : self
+    public function __construct()
     {
-        $this->routes[$requestMethod][$route] = $action;
-
-        return $this;
+        $this->db = new Database();
     }
 
-    public function get(string $route, callable|array $action) : self
-    {
-        return  $this->register('get', $route, $action);
+    public function get($url, $fn) {
+        $this->getRoutes[$url] = $fn;
     }
 
-    public function post(string $route, callable|array $action) : self
-    {
-        return  $this->register('post', $route, $action);
+    public function post($url, $fn) {
+        $this->postRoutes[$url] = $fn;
     }
 
-    public function routes(): array
-    {
-        return $this->routes();
-    }
-
-    public function resolve(string $requestUri, string $requestMethod)
-    {
-        $route = explode('?', $requestUri)[0];
-        $action = $this->routes[$requestMethod][$route] ?? null;
+    public function resolve() {
 
 
-        if(! $action) {
-            throw new RouteNotFoundException();
+        $currentUrl = explode('?', $_SERVER['REQUEST_URI'])[0];
+        $method = $_SERVER['REQUEST_METHOD'];
+
+        if ($method === 'GET') {
+            $fn = $this->getRoutes[$currentUrl] ?? null;
+        } else {
+            $fn = $this->postRoutes[$currentUrl] ?? null;
         }
 
-        if(is_callable($action)) {
-            return call_user_func($action);
-        }
-
-        if(is_array($action)) {
-            [$class, $method] = $action;
-
-            if(class_exists($class)) {
-                $class = new $class();
-
-                if(method_exists($class, $method)) {
-                    return call_user_func_array([$class, $method], []);
-                }
-            }
+        if($fn) {
+            call_user_func($fn, $this);
+        } else {
+            echo "Page not found";
         }
     }
+
+    public function renderView($view, $params = [])
+    {
+        foreach ($params as $key => $value) {
+            $$key = $value;
+        }
+
+        ob_start();
+        include_once dirname(__DIR__) . "/views/$view.php";
+        $content = ob_get_clean();
+        include_once dirname(__DIR__) . "/views/_layout.php";
+    }
+
 }
