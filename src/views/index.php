@@ -1,4 +1,5 @@
-<?php echo $foo; ?>
+<?php /** @var $foo */
+echo $foo; ?>
 
 <form action="/upload" method="post" enctype="multipart/form-data">
     <input type="file" name="receipt" id="">
