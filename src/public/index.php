@@ -13,26 +13,25 @@ define('STORAGE_PATH', __DIR__ . '/../storage');
 define('VIEW_PATH', __DIR__ . '/../views');
 
 
-use App\Exceptions\RouteNotFoundException;
-use App\View;
-
-try {
-    $router = new \App\Router();
-
-    $router
-        ->get('/', [App\Controllers\HomeController::class, 'index'])
-        ->get('/invoices', [App\Controllers\InvoicesController::class, 'index'])
-        ->get('/invoices/create', [App\Controllers\InvoicesController::class, 'create'])
-        ->post('/invoices/create', [App\Controllers\InvoicesController::class, 'store']);
-
-    echo $router->resolve($_SERVER['REQUEST_URI'],
-        strtolower($_SERVER['REQUEST_METHOD'])
-    );
-} catch (\App\Exceptions\RouteNotFoundException $e) {
-
-    header('HTTP/1.1 404 Not Found');
-    http_response_code(404);
-    echo View::make('error/404');
-}
+use App\Controllers\HomeController;
+use App\Controllers\InvoicesController;
+use App\Config;
+use App\App;
 
 
+$router = new \App\Router();
+
+$router
+    ->get('/', [HomeController::class, 'index'])
+    ->get('/invoices', [InvoicesController::class, 'index'])
+    ->get('/invoices/create', [InvoicesController::class, 'create'])
+    ->post('/invoices/create', [InvoicesController::class, 'store']);
+
+
+(new App($router,
+    [
+      'uri' => $_SERVER['REQUEST_URI'],
+      'method' => $_SERVER['REQUEST_METHOD']
+    ], new Config($_ENV)
+)
+)->run();

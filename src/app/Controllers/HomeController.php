@@ -3,79 +3,38 @@
 declare(strict_types=1);
 
 namespace App\Controllers;
+use App\Models\SignUp;
 use App\View;
 use PDO;
+use App\Models\User;
+use App\Models\Invoice;
+
+/**
+ * @mixin PDO
+ */
 
 class HomeController
 {
     public function index() : View
     {
-//        var_dump($_ENV('DB_HOST'));
-
-        try {
-            $db = new PDO("mysql:host=" . $_ENV['DB_HOST'] . ";dbname=" . $_ENV['DB_DATABASE'], $_ENV['DB_USER'], $_ENV['DB_PASS']);
-        } catch (\PDOException $e){
-            throw new \PDOException($e->getMessage(), (int) $e->getCode());
-        }
-
-        $email = "dora@doe.com";
-        $name = "Dora Doe";
+        $email = "dora.l1@doe.com";
+        $name = "Dora Loe1";
         $amount = 20;
 
+        $userModel = new User();
+        $invoiceModel = new Invoice();
 
-        try {
-            $db->beginTransaction();
-
-            $newUserStmt = $db->prepare('
-                    INSERT INTO users (email, full_name, is_active, created_at) 
-                    VALUES (?, ?, 1, NOW())');
-            $newInvoiceStmt = $db->prepare(
-                'INSERT INTO invoices (amount, user_id) VALUES (?, ?)'
-            );
-
-            $newUserStmt->execute([$email, $name]);
-
-            $userId = (int)$db->lastInsertId();
-
-            $newInvoiceStmt->execute([$amount, $userId]);
-
-            $db->commit();
-        } catch(\Throwable $e) {
-            if($db->inTransaction()) {
-                $db->rollBack();
-            }
-        }
-
-        $fetchStmt = $db->prepare(
-            'SELECT invoices.id AS invoice_id, amount, user_id, full_name
-            FROM invoices
-            INNER JOIN users ON user_id = users.id
-            WHERE email = ?'
+        $invoiceId = (new SignUp($userModel, $invoiceModel))->register(
+            [
+                'email' => $email,
+                'name'  => $name,
+            ],
+            [
+                'amount' => $amount
+            ]
         );
 
-        $fetchStmt->execute([$email]);
-
-        echo "<pre>";
-        var_dump($fetchStmt->fetch(PDO::FETCH_ASSOC));
-        echo "</pre>";
-
-        return View::make('index', ['foo' => 'bar']);
+        return View::make('index', ['invoice' => $invoiceModel->find($invoiceId)]);
     }
 
-    public function upload()
-    {
-        echo "<pre>";
-        var_dump($_FILES);
-        echo "</pre>";
-
-        $file_path = STORAGE_PATH . '/' . $_FILES['receipt']['name'];
-
-        move_uploaded_file($_FILES['receipt']['tmp_name'], $file_path);
-
-        header('Location: /');
-
-        echo "<pre>";
-        var_dump(pathinfo($file_path));
-        echo "</pre>";
-    }
 }
