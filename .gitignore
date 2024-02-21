@@ -2,3 +2,7 @@
 .env
 vendor
 src/composer.lock
+docker/storage/
+
+#*
+#!tests/
