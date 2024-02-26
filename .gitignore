@@ -3,6 +3,4 @@
 vendor
 src/composer.lock
 docker/storage/
-
-#*
-#!tests/
+.phpunit.result.cache
