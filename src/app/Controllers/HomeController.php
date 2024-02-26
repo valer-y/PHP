@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 use App\Models\SignUp;
+use App\App;
+use App\Services\InvoiceService;
 use App\View;
 use PDO;
 use App\Models\User;
@@ -17,24 +19,27 @@ class HomeController
 {
     public function index() : View
     {
-        $email = "dora.l11@doe.com";
-        $name = "Dora Loe11";
-        $amount = 20;
+//        $email = "dora.l11@doe.com";
+//        $name = "Dora Loe11";
+//        $amount = 20;
+//
+//        $userModel = new User();
+//        $invoiceModel = new Invoice();
+//
+//        $invoiceId = (new SignUp($userModel, $invoiceModel))->register(
+//            [
+//                'email' => $email,
+//                'name'  => $name,
+//            ],
+//            [
+//                'amount' => $amount
+//            ]
+//        );
 
-        $userModel = new User();
-        $invoiceModel = new Invoice();
+//        return View::make('index', ['invoice' => $invoiceModel->find($invoiceId)]);
 
-        $invoiceId = (new SignUp($userModel, $invoiceModel))->register(
-            [
-                'email' => $email,
-                'name'  => $name,
-            ],
-            [
-                'amount' => $amount
-            ]
-        );
-
-        return View::make('index', ['invoice' => $invoiceModel->find($invoiceId)]);
+        App::$container->get(InvoiceService::class)->process([], 25);
+        return View::make('index');
     }
 
 }
