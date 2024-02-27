@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Controllers;
+use App\Container;
 use App\Models\SignUp;
 use App\App;
 use App\Services\InvoiceService;
@@ -17,6 +18,10 @@ use App\Models\Invoice;
 
 class HomeController
 {
+    public function __construct(private InvoiceService $invoiceService)
+    {
+    }
+
     public function index() : View
     {
 //        $email = "dora.l11@doe.com";
@@ -38,7 +43,7 @@ class HomeController
 
 //        return View::make('index', ['invoice' => $invoiceModel->find($invoiceId)]);
 
-        App::$container->get(InvoiceService::class)->process([], 25);
+      $this->invoiceService->process([], 25);
         return View::make('index');
     }
 

@@ -18,8 +18,8 @@ use App\Controllers\InvoicesController;
 use App\Config;
 use App\App;
 
-
-$router = new \App\Router();
+$container = new \App\Container();
+$router = new \App\Router($container);
 
 $router
     ->get('/', [HomeController::class, 'index'])
