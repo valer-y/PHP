@@ -8,6 +8,7 @@ use App\Exceptions\RouteNotFoundException;
 use App\Services\EmailService;
 use App\Services\InvoiceService;
 use App\Services\PaymentGatewayService;
+use App\Services\PaymentGatewayServiceInterface;
 use App\Services\SalesTaxService;
 use PDO;
 use App\Config;
@@ -21,12 +22,18 @@ class App
 //    public static Container $container;
 
     public function __construct(
+        protected Container $container,
         protected Router $router,
         protected array $request,
         protected Config $config
     )
     {
         static::$db = new DB($config->db ?? []);
+
+        $this->container->set(
+            PaymentGatewayServiceInterface::class,
+            fn(Container $c) => $c->get(PaymentGatewayService::class)
+        );
     }
 
     public function run()
