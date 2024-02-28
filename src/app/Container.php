@@ -25,14 +25,18 @@ class Container implements ContainerInterface
         if( $this->has($id)) {
             $entry = $this->entries[$id];
 
-            return $entry($this);
+            if(is_callable($entry)) {
+                return $entry($this);
+            }
+
+            $id = $entry;
         }
 
         return $this->resolve($id);
 
     }
 
-    public function set(string $id, callable $concrete)
+    public function set(string $id, callable|string $concrete)
     {
         $this->entries[$id] = $concrete;
     }
