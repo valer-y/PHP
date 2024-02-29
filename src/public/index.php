@@ -17,15 +17,23 @@ use App\Controllers\HomeController;
 use App\Controllers\InvoicesController;
 use App\Config;
 use App\App;
+use App\Services\InvoiceService;
 
 $container = new \App\Container();
 $router = new \App\Router($container);
 
-$router
-    ->get('/', [HomeController::class, 'index'])
-    ->get('/invoices', [InvoicesController::class, 'index'])
-    ->get('/invoices/create', [InvoicesController::class, 'create'])
-    ->post('/invoices/create', [InvoicesController::class, 'store']);
+$router->regusterRoutesFromControllerAttributes(
+    [
+        HomeController::class,
+        InvoicesController::class,
+    ]
+);
+
+//$router
+//    ->get('/', [HomeController::class, 'index'])
+//    ->get('/invoices', [InvoicesController::class, 'index'])
+//    ->get('/invoices/create', [InvoicesController::class, 'create'])
+//    ->post('/invoices/create', [InvoicesController::class, 'store']);
 
 
 (new App($container, $router,
