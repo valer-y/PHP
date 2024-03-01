@@ -17,6 +17,7 @@ use App\Controllers\HomeController;
 use App\Controllers\InvoicesController;
 use App\Config;
 use App\App;
+use App\Controllers\UserController;
 use App\Services\InvoiceService;
 
 $container = new \App\Container();
@@ -26,6 +27,7 @@ $router->regusterRoutesFromControllerAttributes(
     [
         HomeController::class,
         InvoicesController::class,
+        UserController::class
     ]
 );
 
