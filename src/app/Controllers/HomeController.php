@@ -6,6 +6,7 @@ namespace App\Controllers;
 use App\Attributes\Get;
 use App\Attributes\Post;
 use App\Container;
+use App\Enums\HttpMethod;
 use App\Models\SignUp;
 use App\App;
 use App\Services\InvoiceService;
@@ -26,6 +27,7 @@ class HomeController
     }
 
     #[Get(routePath: '/')]
+//    #[Route('/home', HttpMethod::Head)]
     public function index() : View
     {
       $this->invoiceService->process([], 25);
