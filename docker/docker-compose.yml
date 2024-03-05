@@ -3,21 +3,21 @@ version: '3.8'
 services:
   app:
     build:
-      context: ./
+      context: ""
       dockerfile: Dockerfile
     container_name: sandbox-app
     restart: always
     working_dir: /var/www/
     volumes:
-      - ../src:/var/www
+      - ../:/var/www
   nginx:
     image: nginx:1.19-alpine
     container_name: sandbox-nginx
     restart: always
     ports:
-      - 8001:80
+      - "8001:80"
     volumes:
-      - ../src:/var/www
+      - ../:/var/www
       - ./nginx:/etc/nginx/conf.d
   db:
     container_name: sandbox-db
@@ -28,7 +28,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - 3307:3306
+      - "3307:3306"
   mailhog:
     container_name: sandbox-mailhog
     image: mailhog/mailhog
@@ -42,5 +42,5 @@ services:
     container_name: sandbox-cron
     build: ./cron
     volumes:
-      - ../src/:/var/www
+      - ../:/var/www
       - ./log/cron:/var/log/cron
