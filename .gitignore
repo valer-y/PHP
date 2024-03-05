@@ -1,6 +1,4 @@
 .idea
 .env
 vendor
-src/composer.lock
-docker/storage/
-.phpunit.result.cache
+docker/storage

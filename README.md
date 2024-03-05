@@ -1,9 +1,7 @@
-#### The exercise for the PHP course "Learn PHP The Right Way" lesson 2.1.
+#### The source code for the PHP course "Learn PHP The Right Way" lesson 3.15.
 
-https://youtu.be/I_9-xWmkh28
+https://youtu.be/bfTIVQvS5JI
 
 ---
 #### Course Playlist
-https://www.youtube.com/watch?v=I_9-xWmkh28&list=PLr3d3QYzkw2xabQRUpcZ_IBk9W50M9pe-&index=35
-
-#38 https://www.youtube.com/watch?v=Jni9c0-NjrY&list=PLr3d3QYzkw2xabQRUpcZ_IBk9W50M9pe-&index=38
+https://www.youtube.com/watch?v=sVbEyFZKgqk&list=PLr3d3QYzkw2xabQRUpcZ_IBk9W50M9pe-

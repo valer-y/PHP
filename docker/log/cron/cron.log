@@ -1,0 +1,28 @@
+
+Warning: require_once(/var/www/scripts/../vendor/autoload.php): Failed to open stream: No such file or directory in /var/www/scripts/email.php on line 9
+
+Fatal error: Uncaught Error: Failed opening required '/var/www/scripts/../vendor/autoload.php' (include_path='.:/usr/local/lib/php') in /var/www/scripts/email.php:9
+Stack trace:
+#0 {main}
+  thrown in /var/www/scripts/email.php on line 9
+
+Warning: require_once(/var/www/scripts/../vendor/autoload.php): Failed to open stream: No such file or directory in /var/www/scripts/email.php on line 9
+
+Fatal error: Uncaught Error: Failed opening required '/var/www/scripts/../vendor/autoload.php' (include_path='.:/usr/local/lib/php') in /var/www/scripts/email.php:9
+Stack trace:
+#0 {main}
+  thrown in /var/www/scripts/email.php on line 9
+
+Fatal error: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.27. in /var/www/vendor/composer/platform_check.php on line 24
+
+Fatal error: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.27. in /var/www/vendor/composer/platform_check.php on line 24
+
+Fatal error: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.27. in /var/www/vendor/composer/platform_check.php on line 24
+
+Fatal error: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.27. in /var/www/vendor/composer/platform_check.php on line 24
+
+Fatal error: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.27. in /var/www/vendor/composer/platform_check.php on line 24
+
+Fatal error: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.27. in /var/www/vendor/composer/platform_check.php on line 24
+
+Fatal error: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.27. in /var/www/vendor/composer/platform_check.php on line 24
