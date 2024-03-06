@@ -3,11 +3,14 @@
 namespace App\Entity;
 
 use App\Enums\InvoiceStatus;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\OneToMany;
+use Ramsey\Collection\Collection;
 
 #[Entity]
 #[Table('invoices')]
@@ -28,6 +31,14 @@ class Invoice
 
     #[Column(name: 'created_at')]
     private \DateTime $createdAt;
+
+    #[OneToMany(targetEntity: InvoiceItem::class, mappedBy: 'invoice')]
+    private Collection $items;
+
+    public function __construct()
+    {
+        $this->items = new ArrayCollection();
+    }
 
     public function getId(): int
     {
@@ -74,5 +85,13 @@ class Invoice
         $this->createdAt = $createdAt;
     }
 
+    public function addItem(InvoiceItem $item) : Invoice
+    {
+        $item->setInvoice($this);
+
+        $this->items->add($item);
+
+        return $this;
+    }
 
 }
