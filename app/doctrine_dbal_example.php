@@ -19,8 +19,8 @@ $connectionParams = [
 ];
 $conn = DriverManager::getConnection($connectionParams);
 
-$stmt = $conn->prepare('SELECT * FROM invoices');
-$result = $stmt->executeQuery();
-
-var_dump($result->fetchAssociative());
+//$stmt = $conn->prepare('SELECT * FROM invoices WHERE id= :id');
+//$result = $stmt->executeQuery([':id' => 1]);
+//
+//var_dump($result->fetchAssociative());
 
