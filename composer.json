@@ -5,8 +5,12 @@
         "psr/container": "^2.0",
         "symfony/mailer": "^6.0",
         "doctrine/dbal": "^3.3",
-        "doctrine/orm": "^3.1",
-        "symfony/cache": "^7.0"
+        "doctrine/orm": "^2.11",
+        "symfony/cache": "^6.0",
+        "doctrine/migrations": "^3.4",
+        "illuminate/database": "^9.8",
+        "illuminate/events": "^9.8",
+        "ext-curl": "*"
     },
     "autoload": {
         "psr-4": {
