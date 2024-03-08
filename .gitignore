@@ -2,3 +2,5 @@
 .env
 vendor
 docker/storage
+composer.lock
+docker/log/cron/cron.log

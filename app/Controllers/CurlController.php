@@ -11,7 +11,7 @@ use App\Services\Emailable\EmailValidationService;
 class CurlController
 {
 
-    public function __construct(private EmailValidationService $emailValidationService)
+    public function __construct(private EmailValidationInterface $emailValidationService)
     {
     }
 

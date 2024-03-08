@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Emailable;
+namespace App\Services\AbstaractApi;
 
 use App\Contracts\EmailValidationInterface;
 use GuzzleHttp\Client;
@@ -11,9 +11,9 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use SebastianBergmann\Type\RuntimeException;
 
-class EmailValidationService implements EmailValidationInterface
+class AbstaractApiService implements EmailValidationInterface
 {
-    private string $baseUrl = 'https://api.emailable.com/v1/';
+    private string $baseUrl = 'https://emailvalidation.abstractapi.com/v1/';
 
     public function __construct(private string $apiKey)
     {
@@ -42,7 +42,7 @@ class EmailValidationService implements EmailValidationInterface
             'email' => $email
         ];
 
-        $responce = $client->get('verify', ['query' => $params]);
+        $responce = $client->get('', ['query' => $params]);
 
         return json_decode($responce->getBody()->getContents(), true);
     }

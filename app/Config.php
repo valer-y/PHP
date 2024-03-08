@@ -30,6 +30,7 @@ class Config
             ],
             'apiKeys' => [
                 'emailable'  => $env['EMAILABLE_API_KEY'] ?? '',
+                'absrtact_api' => $env['ABSTRACT_API_KEY'] ?? ''
             ]
         ];
     }
