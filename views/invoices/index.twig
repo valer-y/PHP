@@ -1,0 +1,50 @@
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+    }
+
+    table tr th, table tr td {
+        border: 1px #eee solid;
+        padding: 5px;
+    }
+
+    .color-green {
+        color: green;
+    }
+
+    .color-red {
+        color: red;
+    }
+
+    .color-gray {
+        color: gray;
+    }
+
+    .color-orange {
+        color: orange;
+    }
+</style>
+<table>
+    <thead>
+    <tr>
+        <th>Invoice #</th>
+        <th>Amount</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for invoice in invoices %}
+    <tr>
+        <td>{{ invoice.incoiceNumber }}</td>
+        <td>{{ invoice.amount }}</td>
+        <td>{{ invoice.status }}</td>
+        <td>{{ invoice.dueDate is empty ? 'N/A' : invoice.dueDate|date('m/d/Y')}}</td>
+    </tr>
+    {% else %}
+        <tr><td colspan="4">No Invoice Found</td></tr>
+    {% endfor %}
+    <?php endforeach ?>
+    </tbody>
+</table>

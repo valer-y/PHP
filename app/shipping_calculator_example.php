@@ -22,7 +22,7 @@ $packageDimanesions = new \App\Services\Shipping\PackageDimension(
 $billableWeight = (new BillableWeightCalculatorService())->calculate(
     $packageDimanesions,
     new \App\Services\Shipping\Weight($package['weight']),
-    \App\Services\Shipping\DimDivisor::FEDEX;
+    \App\Services\Shipping\DimDivisor::FEDEX
 );
 
 echo $billableWeight . ' lb' . PHP_EOL;
