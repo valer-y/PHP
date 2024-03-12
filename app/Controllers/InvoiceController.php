@@ -23,6 +23,8 @@ class InvoiceController
     {
         $invoices = Invoice::query()->where('status', InvoiceStatus::Paid)->get();
 
+//        xdebug_info();
+
         return $this->twig->render('invoices/index.twig', ['invoices' => $invoices]);
     }
 
