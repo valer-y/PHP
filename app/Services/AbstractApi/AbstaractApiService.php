@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\AbstaractApi;
+namespace App\Services\AbstractApi;
 
 use App\Contracts\EmailValidationInterface;
 use GuzzleHttp\Client;

@@ -3,4 +3,5 @@
 vendor
 docker/storage
 composer.lock
-docker/log/cron
+docker/log
+docker/cron
