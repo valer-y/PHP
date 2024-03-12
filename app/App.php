@@ -51,7 +51,7 @@ class App
             'auto_reload' => true
         ]);
 
-        $twig->addExtension(new IntlExtension());
+//        $twig->addExtension(new IntlExtension());
 
         $this->container->bind(MailerInterface::class, fn() => new CustomMailer($this->config->mailer['dsn']));
         $this->container->bind(EmailValidationInterface::class, fn() => new EmailValidationService($this->config->apiKeys['emailable']));
